@@ -1,0 +1,53 @@
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50vh;
+}
+.transcript h2{
+    text-align: center;
+    color: #383899;
+    font-size: 35px;
+    margin-top: -2px;
+}
+.content{
+    width: 550px;
+    height: 300px;
+    background-color: rgb(209, 207, 207);
+    border: 1px solid rgb(96, 6, 6);
+}
+.input_transcript{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.label{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 20%;
+    height: auto;
+    color: black;
+    font-size: 20px;
+}
+.input{
+    width: 50%;
+    height: auto;
+}
+.input input{
+    width: 300px;
+    height: 20px;
+}
+.input select{
+    width: 50px;
+    color: red;
+}
+.button{
+    display: flex;
+    margin-top: 30px;
+    gap: 50px ;
+    width: 100%;
+}
