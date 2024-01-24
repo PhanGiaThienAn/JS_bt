@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://code.jquery.com/jquery-3.3.1.slim.min.js">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"> -->
+</head>
+<body>
+    <div class="container mt-4">
+        <form name="frm" class="frm">
+            <div class="form-group">
+                <label for="product">Product Name:</label>
+                <input type="text" class="form-control" name="product" id="product" required>
+            </div>
+            <div class="form-group">
+                <label for="img">Product Picture:</label>
+                <input type="file" class="form-control" name="img" id="img" required style="padding: 5px;">
+            </div>
+            <div class="form-group">
+                <label for="price">Product Price:</label>
+                <input type="number" class="form-control" name="price" id="price" required>
+            </div>
+            <button type="button" onclick="addProduct()" class="btn btn-danger">Add</button>
+        </form>
+        <h4 class="mt-4">All Products</h4>
+        <hr class="new">
+        <div class="row mt-4" id="productList">
+        </div>
+    </div>
+    <script>
+        function addProduct() {
+            const productName = document.getElementById('product').value;
+            const inputFile = document.getElementById('img');
+            const productPrice = parseFloat(document.getElementById('price').value);
+
+            if (productName && inputFile.files.length > 0 && !isNaN(productPrice) && productPrice > 0) {
+                const file = inputFile.files[0];
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    const productCard = createProductCard(productName, e.target.result, productPrice);
+                    $('#productList').append(productCard);
+
+                    // Xóa giá trị từ các ô input
+                    clearInputs();
+                };
+
+                reader.readAsDataURL(file);
+            } else {
+                alert("Vui lòng điền đầy đủ thông tin với giá trị hợp lệ.");
+            }
+        }
+
+        function createProductCard(name, image, price) {
+            const productCard = `
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="${image}" class="card-img-top" alt="${name}">
+                        <div class="card-body">
+                            <h5 class="card-title">${name}</h5>
+                            <p class="card-text">Price: $${price.toFixed(2)}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            return productCard;
+        }
+
+        function clearInputs() {
+            document.getElementById('product').value = '';
+            document.getElementById('img').value = '';
+            document.getElementById('price').value = '';
+        }
+    </script>
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script> -->
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h4 {
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="file"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color:rgb(248, 72, 102);
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color:rgb(248, 72, 102);
+        }
+
+        #productList {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-img-top {
+            width: 100%;
+            height: auto;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .card-text {
+            font-size: 16px;
+            color: #555;
+            margin: 0;
+        }
+
+        hr.new {
+            border-top: 2px solid rgb(248, 72, 102);
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .card-img-top {
+            width: 100%;
+            height: auto;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            padding: 10px; /* Thêm padding vào hình ảnh */
+        }
+
+
+    </style>
+</body>
+</html>
