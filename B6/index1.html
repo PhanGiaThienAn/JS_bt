@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="text-align: center;">
+    <h2>JS</h2>
+    <p>Method PUSH</p>
+
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name">
+    </div>
+    <div>
+        <label for="id">ID:</label>
+        <input type="text" id="id">
+    </div>
+    <div>
+        <label for="productname">Product name:</label>
+        <input type="text" id="productname">
+    </div>
+    <div>
+        <label for="quantity">Quantity:</label>
+        <input type="text" id="quantity">
+    </div>
+    <div>
+        <label for="price">Price:</label>
+        <input type="text" id="price">
+    </div>
+    <div>
+        <input type="button" value="Save" onclick="save()">
+        <input type="button" value="Show" onclick="show()">
+        <input type="button" value="Reset"  onclick="reset()">
+    </div>
+
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Auto</th>
+                <th>Name</th>
+                <th>ID</th>
+                <th>Product name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody id="tbl"></tbody>
+    </table>
+
+    <script>
+        var arr = [];
+
+        function save() {
+            var a = {
+                name: document.getElementById('name').value,
+                id: document.getElementById('id').value,
+                productname: document.getElementById('productname').value,
+                quantity: document.getElementById('quantity').value,
+                price: document.getElementById('price').value
+            };
+            console.log(a);
+            arr.push(a);
+            resetInputs();
+        }
+
+        function show() {
+            var html = '';
+            for (var i = 0; i < arr.length; i++) {
+                var n = i + 1;
+                html += "<tr>";
+                html += "<td>" + n + "</td>";
+                html += "<td>" + arr[i].name + "</td>";
+                html += "<td>" + arr[i].id + "</td>";
+                html += "<td>" + arr[i].productname + "</td>";
+                html += "<td>" + arr[i].quantity + "</td>";
+                html += "<td>" + arr[i].price + "</td>";
+                html += "<td>" + parseFloat(arr[i].quantity) * parseFloat(arr[i].price) + "</td>";
+                html += "</tr>";
+            }
+            document.getElementById('tbl').innerHTML = html;
+        }
+
+        function resetInputs() {
+            document.getElementById('name').value = '';
+            document.getElementById('id').value = '';
+            document.getElementById('productname').value = '';
+            document.getElementById('quantity').value = '';
+            document.getElementById('price').value = '';
+        }
+
+        function reset() {
+            arr = [];
+            document.getElementById('tbl').innerHTML = '';
+            resetInputs();
+        }
+    </script>
+
+<style>
+    body {
+        text-align: center;
+        font-family: Arial, sans-serif;
+    }
+
+    table {
+        margin: 20px auto;
+        border-collapse: collapse;
+        width: 80%;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #333;
+        color: #fff;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    input[type="text"] {
+        padding: 5px;
+        margin: 5px;
+    }
+
+    input[type="button"] {
+        padding: 10px 20px;
+        margin: 10px;
+        background-color: #333;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+    }
+
+    input[type="button"]:hover {
+        background-color: #555;
+    }
+
+    label {
+  display: inline-block;
+  width: 100px;
+  text-align: right;
+  margin-right: 10px;
+}
+</style>
+
+
+</body>
+</html>
